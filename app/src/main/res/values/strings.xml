@@ -1,0 +1,12 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">FitShedule</string>
+    <string name="error">Error</string>
+    <string name="sunday">sunday</string>
+    <string name="_9_00">9:00</string>
+    <string name="_10_00">- 10:00</string>
+    <string name="trening_name">Йога</string>
+    <string name="trening_place">Place</string>
+    <string name="trener_name">Vasya</string>
+    <string name="description" tools:ignore="Typos">bla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla bla</string>
+    <string name="todo">TODO</string>
+</resources>

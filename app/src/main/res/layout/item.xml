@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@drawable/rounded_btn"
+    >
+
+    <TextView
+        android:id="@+id/tvWeekday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="21sp"
+        android:textColor="#fff"
+        android:text="@string/sunday"
+        android:textAlignment="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvStartClass"
+        />
+
+    <TextView
+        android:id="@+id/tvStartClass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/_9_00"
+        android:textSize="20sp"
+        android:textAlignment="viewEnd"
+        app:layout_constraintTop_toBottomOf="@id/tvWeekday"
+        app:layout_constraintBottom_toTopOf="@id/tvNameTrening"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvEndClass"
+        />
+
+    <TextView
+        android:id="@+id/tvEndClass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="viewStart"
+        android:text="@string/_10_00"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/tvWeekday"
+        app:layout_constraintBottom_toTopOf="@id/tvNameTrening"
+        app:layout_constraintStart_toEndOf="@id/tvStartClass"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tvNameTrening"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="24sp"
+        android:text="@string/trening_name"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/tvStartClass"
+        app:layout_constraintBottom_toTopOf="@id/tvPlace"
+        />
+
+    <TextView
+        android:id="@+id/tvPlace"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:text="@string/trening_place"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@id/tvNameTrening"
+        app:layout_constraintBottom_toTopOf="@id/tvCoach"
+        />
+
+    <TextView
+        android:id="@+id/tvCoach"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:text="@string/trener_name"
+        app:layout_constraintTop_toBottomOf="@+id/tvPlace"
+        />
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:textSize="18sp"
+        android:text="@string/description"
+        android:paddingBottom="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tvCoach"
+        />
+
+</android.support.constraint.ConstraintLayout>
+
