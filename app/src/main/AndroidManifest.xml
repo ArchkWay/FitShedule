@@ -6,6 +6,7 @@
 
     <application
         android:allowBackup="true"
+        android:configChanges="orientation|screenSize"
         android:icon="@mipmap/square_fit"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/rounded_fit"

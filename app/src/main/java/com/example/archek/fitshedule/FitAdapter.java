@@ -16,7 +16,7 @@ import java.util.List;
 public class FitAdapter extends RecyclerView.Adapter<FitAdapter.ViewHolder> {
 
     private List<ObjectResponse> shedules = new ArrayList<>();//main list for data to adapter
-    String weekday;
+    private String weekday;
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
