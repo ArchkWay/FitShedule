@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         /*if database is empty, load from net into adapter & database */
         if (list.isEmpty()){
             loadDataFromNet(cursor);
+            cursor.close();
         }
         /*put geting data into adapter*/
         else adapter.replaceAll(list);
@@ -75,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         rvShedule.setLayoutManager(layoutManager);
         rvShedule.setAdapter(adapter);
     }
-    private void loadDataFromNet(final Cursor cursors){
+    private void loadDataFromNet(final Cursor cursor){
         Call <List <ObjectResponse>> callList = service.getShedule();
         callList.enqueue(new Callback <List <ObjectResponse>>() {
             @Override
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                 /*load data to adapter*/
                 adapter.replaceAll(tempList);
                 /*load data to database*/
-                if(cursors == null ){
+                if(cursor.moveToNext()){
                     for (int i = 0; i < tempList.size(); i++) {
                         contentValues.put(DBHelper.KEY_NAME, tempList.get(i).getName());
                         contentValues.put(DBHelper.KEY_DESC, tempList.get(i).getDescription());
