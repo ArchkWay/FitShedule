@@ -45,16 +45,16 @@ public class MainActivity extends AppCompatActivity {
         setupRecyclerView();
         final Cursor cursor = database.query(DBHelper.TABLE_TRENINGS, null, null, null, null, null, null);
 
-        /*download data from a database(if it not empty)*/
-        getDataFromDB(cursor);
-
+        /*download data from a database(if is it not empty)*/
+        if(cursor.moveToNext()) {
+            getDataFromDB(cursor);
+        }
+        else {
         /*if database is empty, load from net into adapter & database */
-        if (list.isEmpty()){
-            loadDataFromNet(cursor);
+            loadDataFromNet();
             cursor.close();
         }
         /*put geting data into adapter*/
-        else adapter.replaceAll(list);
 
         /*Active Image for reloading*/
         ImageView ivRefresh = findViewById(R.id.ivRefresh);
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         rvShedule.setLayoutManager(layoutManager);
         rvShedule.setAdapter(adapter);
     }
-    private void loadDataFromNet(final Cursor cursor){
+    private void loadDataFromNet(){
         Call <List <ObjectResponse>> callList = service.getShedule();
         callList.enqueue(new Callback <List <ObjectResponse>>() {
             @Override
@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
                 /*load data to adapter*/
                 adapter.replaceAll(tempList);
                 /*load data to database*/
-                if(cursor.moveToNext()){
                     for (int i = 0; i < tempList.size(); i++) {
                         contentValues.put(DBHelper.KEY_NAME, tempList.get(i).getName());
                         contentValues.put(DBHelper.KEY_DESC, tempList.get(i).getDescription());
@@ -98,10 +97,7 @@ public class MainActivity extends AppCompatActivity {
                         contentValues.put(DBHelper.KEY_NAME_COACH, tempList.get(i).getTeacher());
                         database.insert(DBHelper.TABLE_TRENINGS, null, contentValues);
                     }
-                }
-
             }
-
             @Override
             public void onFailure(Call <List <ObjectResponse>> call, Throwable t) {
                 Toast.makeText(MainActivity.this, R.string.error, Toast.LENGTH_SHORT).show();
@@ -110,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
     }
     private void getDataFromDB(Cursor cursor){
         /*get data from database*/
-        if (cursor.moveToFirst()) {
             int nameIndex = cursor.getColumnIndex(DBHelper.KEY_NAME);
             int descIndex = cursor.getColumnIndex(DBHelper.KEY_DESC);
             int weekdayIndex = cursor.getColumnIndex(DBHelper.KEY_WEEKDAY);
@@ -122,8 +117,7 @@ public class MainActivity extends AppCompatActivity {
                 Integer weekday = Integer.valueOf(cursor.getString(weekdayIndex));
                 list.add(new ObjectResponse(cursor.getString(nameIndex), cursor.getString(descIndex), weekday, cursor.getString(startIndex), cursor.getString(endIndex), cursor.getString(placeIndex), cursor.getString(coachIndex)));
             } while (cursor.moveToNext());
-        } else cursor.close();
-
+            adapter.replaceAll(list);
         cursor.close();
     }
 }
